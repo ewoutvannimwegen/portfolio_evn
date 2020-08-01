@@ -20,7 +20,8 @@ h5,
 h6,
 strong {
   color: var(--mainText);
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
+  font-weight: 500;
 }
 
 p,
@@ -30,7 +31,7 @@ label,
 input,
 textarea {
   color: var(--secondaryText);
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 
 a {
@@ -81,6 +82,45 @@ h6 {
 .main-container {
   width: 1200px;
   margin: 0 auto;
+}
+
+.greeting-wrapper {
+  display: grid;
+  text-align: center;
+  align-content: center;
+  border: 2px dashed lightcoral;
+  min-height: 10rem;
+}
+
+.intro-wrapper {
+  background-color: var(--secondaryColor);
+  border-color: 1px solid var(--borderColor);
+
+  -webkit-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3em 30em;
+  grid-template-areas:
+    'nav-wrapper nav-wrapper'
+    'left-column right-column';
+}
+
+.nav-wrapper {
+  grid-area: nav-wrapper;
+  border: 1px dashed lightcoral;
+}
+
+.left-column {
+  grid-area: left-column;
+  border: 1px dashed lightcoral;
+}
+
+.right-column {
+  grid-area: right-column;
+  border: 1px dashed lightcoral;
 }
 
 @media screen and (max-width: 1200px) {
