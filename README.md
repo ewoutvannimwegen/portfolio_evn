@@ -7,11 +7,11 @@ Flexbox
 
 ## To Do List
 
-- Introduction []
-- About Me []
-- Work []
-- Contact []
-- Change the theme feature (javascript) []
+- Introduction [x]
+- About Me [x]
+- Work [x]
+- Contact [x]
+- Change the theme feature (javascript) [x]
 
 ## Notes
 
