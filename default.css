@@ -14,6 +14,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 body * {
@@ -108,7 +109,6 @@ h6 {
   box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3em 30em;
   grid-template-areas:
     'nav-wrapper nav-wrapper'
     'left-column right-column';
@@ -397,5 +397,18 @@ h6 {
 
   .right-column {
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #preview-shadow {
+    max-width: 280px;
+    height: 180px;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+
+  #preview {
+    width: 280px;
   }
 }
