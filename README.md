@@ -14,5 +14,3 @@ Flexbox
 - Change the theme feature (javascript) [x]
 
 ## Notes
-
-- Paused video at: 1:13:27
