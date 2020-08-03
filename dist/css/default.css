@@ -46,6 +46,7 @@ textarea {
 a {
   text-decoration: none;
   color: #17a2b8;
+  font-family: 'Roboto Mono', monospace;
 }
 
 ul {
@@ -294,13 +295,40 @@ h6 {
 }
 
 .social-links {
-  display: grid;
   align-content: center;
   text-align: center;
 }
 
 #social_img {
   width: 100%;
+}
+
+.fa {
+  padding-top: 90px;
+  padding-left: 70px;
+  font-size: 40px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.fa:hover {
+  font-size: 50px;
+  opacity: 0.7;
+}
+
+.fa-github {
+  background: #fff;
+  color: #000;
+}
+
+.fa-linkedin {
+  background: #fff;
+  color: rgb(13, 116, 156);
+}
+
+.fa-gitlab {
+  background: #fff;
+  color: rgb(248, 151, 4);
 }
 
 .post-wrapper {
