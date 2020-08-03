@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "portfolio website",
   "main": "script.js",
-  "homepage": "https://ewout155.github.io/Personal_Portfolio_v2",
+  "homepage": "https://ewout155.github.io/portfolio_evn",
   "dependencies": {
     "gh-pages": "^3.1.0"
   },
@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ewout155/Personal_Portfolio_v2.git"
+    "url": "git+https://github.com/ewout155/portfolio_evn"
   },
   "author": "Ewout van Nimwegen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ewout155/Personal_Portfolio_v2/issues"
+    "url": "https://github.com/ewout155/portfolio_evn/issues"
   },
-  "homepage": "https://github.com/ewout155/Personal_Portfolio_v2#readme"
+  "homepage": "https://github.com/ewout155/portfolio_evn#readme"
 }
