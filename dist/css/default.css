@@ -79,10 +79,10 @@ h6 {
 
 .fa {
   padding-top: 50px;
-  padding-left: 70px;
   font-size: 40px;
-  text-align: center;
+  padding: 30px;
   text-decoration: none;
+  background: --var(--secondaryColor);
 }
 
 .fa:hover {
@@ -91,17 +91,14 @@ h6 {
 }
 
 .fa-github {
-  background: #fff;
   color: #000;
 }
 
 .fa-linkedin {
-  background: #fff;
   color: rgb(13, 116, 156);
 }
 
 .fa-gitlab {
-  background: #fff;
   color: rgb(248, 151, 4);
 }
 
