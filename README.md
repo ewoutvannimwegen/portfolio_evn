@@ -1,4 +1,4 @@
-# Portfolio Website v2
+# Portfolio Website
 
 ## Languages & Technologies
 
