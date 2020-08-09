@@ -29,3 +29,11 @@ add your domain, example: ewoutvannimwegen.xyz
 #### 3. Add Subdomain [x]
 
 www.ewoutvannimwegen.xyz points to ewout155.github.io.
+
+### Setup NPM
+
+#### 1. npm init
+
+#### 2. npm i gh-pages
+
+#### 3. npm run deploy
