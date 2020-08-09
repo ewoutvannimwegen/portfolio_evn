@@ -405,6 +405,17 @@ h6 {
   border: none;
 }
 
+footer {
+  font-family: 'Roboto Mono', monospace;
+  position: fixed;
+  bottom: 0;
+  background: #000;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem;
+}
+
 @media screen and (max-width: 1200px) {
   .main-container {
     width: 95%;
