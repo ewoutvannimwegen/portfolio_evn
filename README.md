@@ -13,18 +13,19 @@ Flexbox
 - Contact [x]
 - Change the theme feature (javascript) [x]
 
-## Notes
+### To add a custom domain setup:
 
-To add a custom domain setup:
+#### 1. External hosts (Github) [x]
 
-1. External hosts (Github)
-   .ewoutvannimwegenxyz points to 185.199.108.153
-   .ewoutvannimwegenxyz points to 185.199.109.153
-   .ewoutvannimwegenxyz points to 185.199.110.153
-   .ewoutvannimwegenxyz points to 185.199.111.153
+- .ewoutvannimwegenxyz points to 185.199.108.153
+- .ewoutvannimwegenxyz points to 185.199.109.153
+- .ewoutvannimwegenxyz points to 185.199.110.153
+- .ewoutvannimwegenxyz points to 185.199.111.153
 
-2. CNAME file
-   add your domain, example: ewoutvannimwegen.xyz
+#### 2. CNAME file [x]
 
-3. Add Subdomain
-   www.ewoutvannimwegen.xyz points to ewout155.github.io.
+add your domain, example: ewoutvannimwegen.xyz
+
+#### 3. Add Subdomain [x]
+
+www.ewoutvannimwegen.xyz points to ewout155.github.io.
