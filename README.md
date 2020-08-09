@@ -32,8 +32,6 @@ www.ewoutvannimwegen.xyz points to ewout155.github.io.
 
 ### Setup NPM
 
-#### 1. npm init
-
-#### 2. npm i gh-pages
-
-#### 3. npm run deploy
+- 1. npm init
+- 2. npm i gh-pages
+- 3. npm run deploy
