@@ -1,7 +1,7 @@
 {
   "name": "portfolio_evn",
   "version": "1.0.0",
-  "description": "Portfolio Ewout van Nimwegen",
+  "description": "Portfolio",
   "main": "index.js",
   "scripts": {
     "deploy": "gh-pages -d dist"
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ewoutvannimwegen/portfolio_evn/issues"
   },
-  "homepage": "https://github.com/ewoutvannimwegen/portfolio_evn#readme"
+  "homepage": "https://github.com/ewoutvannimwegen/portfolio_evn#readme",
+  "dependencies": {
+    "gh-pages": "^3.1.0"
+  }
 }
