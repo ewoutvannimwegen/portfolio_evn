@@ -84,9 +84,8 @@ h7 {
 }
 
 .fa {
-  padding-top: 50px;
   font-size: 40px;
-  padding: 30px;
+  width: 80px;
   text-decoration: none;
   background: --var(--secondaryColor);
 }
@@ -109,11 +108,9 @@ h7 {
 }
 
 .fa-project {
-  padding-top: 0px;
-  padding-bottom: 0px;
+  width: 0px;
+  margin-left: 180px;
   font-size: 25px;
-  padding-left: 180px;
-  padding-right: 0px;
   text-decoration: none;
   background: --var(--secondaryColor);
 }
