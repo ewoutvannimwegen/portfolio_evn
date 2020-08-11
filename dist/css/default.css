@@ -4,6 +4,7 @@
   --borderColor: #c1c1c1;
   --mainText: black;
   --secondaryText: #4b5156;
+  --webLink: rgb(3, 190, 223);
   --themeDotBorder: #24292e;
   --previewBg: rgb(251, 249, 243, 0.8);
   --previewShadow: #f0ead6;
@@ -105,6 +106,20 @@ h7 {
 
 .fa-gitlab {
   color: rgb(248, 151, 4);
+}
+
+.fa-project {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 25px;
+  padding-left: 150px;
+  text-decoration: none;
+  background: --var(--secondaryColor);
+}
+
+.fa-project:hover {
+  font-size: 30px;
+  opacity: 0.7;
 }
 
 .s1 {
@@ -322,6 +337,13 @@ h7 {
   display: flex;
   justify-content: space-evenly;
   background-color: var(--previewShadow);
+}
+
+.web-link {
+  color: var(--webLink);
+  font-family: 'Roboto Mono', monospace;
+  text-align: left;
+  font-size: 14px;
 }
 
 .social-links {
