@@ -112,7 +112,8 @@ h7 {
   padding-top: 0px;
   padding-bottom: 0px;
   font-size: 25px;
-  padding-left: 150px;
+  padding-left: 180px;
+  padding-right: 0px;
   text-decoration: none;
   background: --var(--secondaryColor);
 }
