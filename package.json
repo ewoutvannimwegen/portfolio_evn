@@ -1,23 +1,19 @@
 {
-  "name": "portfolio_ewout_van_nimwegen",
+  "name": "portfolio_evn",
   "version": "1.0.0",
-  "description": "portfolio website",
-  "main": "script.js",
-  "homepage": "https://ewout155.github.io/portfolio_evn",
-  "dependencies": {
-    "gh-pages": "^3.1.0"
-  },
-  "devDependencies": {},
+  "description": "Portfolio Ewout van Nimwegen",
+  "main": "index.js",
   "scripts": {
     "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ewout155/portfolio_evn.git"
+    "url": "git+https://github.com/ewoutvannimwegen/portfolio_evn.git"
   },
   "author": "Ewout van Nimwegen",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ewout155/portfolio_evn/issues"
-  }
+    "url": "https://github.com/ewoutvannimwegen/portfolio_evn/issues"
+  },
+  "homepage": "https://github.com/ewoutvannimwegen/portfolio_evn#readme"
 }
