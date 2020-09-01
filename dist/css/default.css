@@ -85,7 +85,7 @@ h7 {
 
 .fa {
   font-size: 40px;
-  width: 80px;
+  width: 100px;
   text-decoration: none;
   background: --var(--secondaryColor);
 }
@@ -344,9 +344,14 @@ h7 {
   font-size: 14px;
 }
 
+.social-media {
+}
+
 .social-links {
   align-content: center;
   text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 #social_img {
