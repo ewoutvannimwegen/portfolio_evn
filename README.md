@@ -1,37 +1,29 @@
 # Portfolio Website
 
-## Languages & Technologies
+- Static website: HTML & CSS
+- Flexbox
 
-Static website: HTML & CSS
-Flexbox
+Configure an external domain
 
-## To Do List
-
-- Introduction [x]
-- About Me [x]
-- Work [x]
-- Contact [x]
-- Change the theme feature (javascript) [x]
-
-### To add a custom domain setup:
-
-#### 1. External hosts (Github) [x]
+1. <b>External hosts (Github)</b>
 
 - .ewoutvannimwegenxyz points to 185.199.108.153
 - .ewoutvannimwegenxyz points to 185.199.109.153
 - .ewoutvannimwegenxyz points to 185.199.110.153
 - .ewoutvannimwegenxyz points to 185.199.111.153
 
-#### 2. CNAME file [x]
+2. <b>CNAME file</b>
 
 add your domain, example: ewoutvannimwegen.xyz
 
-#### 3. Add Subdomain [x]
+3. <b>Add Subdomain</b>
 
-www.ewoutvannimwegen.xyz points to ewout155.github.io.
+www.ewoutvannimwegen.xyz points to ewoutvannimwegen.github.io.
 
-### Setup NPM
+Setup NPM
 
-- npm init
-- npm i gh-pages
-- npm run deploy
+```console
+npm init
+npm i gh-pages
+npm run deploy
+```
