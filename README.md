@@ -3,22 +3,22 @@
 - Static website: HTML & CSS
 - Flexbox
 
-Configure an external domain
+At the moment I'm using [epik](https://registrar.epik.com/) to register my domain. The information below describes my setup.
 
-1. <b>External hosts (Github)</b>
+### <b>External hosts (Github)</b>
 
-- .ewoutvannimwegenxyz points to 185.199.108.153
-- .ewoutvannimwegenxyz points to 185.199.109.153
-- .ewoutvannimwegenxyz points to 185.199.110.153
-- .ewoutvannimwegenxyz points to 185.199.111.153
+- ewoutvannimwegenxyz points to 185.199.108.153
+- ewoutvannimwegenxyz points to 185.199.109.153
+- ewoutvannimwegenxyz points to 185.199.110.153
+- ewoutvannimwegenxyz points to 185.199.111.153
 
-2. <b>CNAME file</b>
+### <b>CNAME file</b>
 
-add your domain, example: ewoutvannimwegen.xyz
+Add the domain: [ewoutvannimwegen.xyz](http://www.ewoutvannimwegen.xyz/)
 
-3. <b>Add Subdomain</b>
+### <b>Add Subdomain</b>
 
-www.ewoutvannimwegen.xyz points to ewoutvannimwegen.github.io.
+[ewoutvannimwegen.xyz](http://www.ewoutvannimwegen.xyz/) points to ewoutvannimwegen.github.io
 
 Setup NPM
 
