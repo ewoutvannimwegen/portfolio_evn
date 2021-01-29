@@ -1,2 +1,4 @@
 prettierrc
 node_modules
+.vscode
+.gitignore
