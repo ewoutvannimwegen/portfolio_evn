@@ -1,4 +1,4 @@
-prettierrc
-node_modules
+.prettierrc
 .vscode
 .gitignore
+node_modules/
