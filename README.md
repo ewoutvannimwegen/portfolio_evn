@@ -3,7 +3,7 @@
 - Static website: HTML & CSS
 - Flexbox
 
-At the moment I'm using [epik](https://registrar.epik.com/) to register my domain. The information below describes my setup.
+At the moment I'm using [epik](https://registrar.epik.com/) to register my domain. The information below describes my
 
 ### <b>External hosts (Github)</b>
 
