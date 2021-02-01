@@ -25,8 +25,46 @@
     </div>
 
     <div class="main-container">
-      <h3>STM32 Bare Metal</h3>
-      <p>Coming soon ...</p>
+      <h3>Bare Metal STM32</h3>
+      <p>
+        A while back I had to develop a high speed monitoring system. After some
+        research I decided to use a ARM STM32 MPU. The STM32 developers wrote 2
+        libraries: HAL & LL. HAL is easy to use because the programmer just
+        needs to learn the so called high level API commands. LL on the other
+        hand is a bit more difficult to use. This is due the fact that it uses a
+        lot less functions. I decided to use HAL because I had zero experience
+        with STM32 boards. After some coding the application worked but I did
+        not understand what was going on. HAL works fine and quick but if a
+        error or bug occures it is very difficult to solve it.
+      </p>
+
+      <p>
+        Luckly I learned some register programming in C for the MSP430FR5969.
+        This is a Cortex M0 board, a lot easier to use than my STM32MP1 MPU,
+        which contains a Cortex M4 and Cortex A7. The Code Composer Studio IDE
+        offers the user a easy to use minimal coding environment for my MSP430.
+        Keil IDE, the STM32 variant does not, the user needs to pay for a
+        licence to write a program that is larger than 30kB. Other variants like
+        System Workbench or STM32Cube IDE are bloated just like Keil and they
+        are not easy to use if you want a minimal environment. After some
+        digging I realised that the CMSIS and ST devs offer files for every
+        STM32 board, these contain references to the memory locations of the
+        chip. Combined with a Makefile, Text editor and debugger this would be
+        the best experience possible (at least in my opinion of course).
+      </p>
+
+      <p>
+        My project is open source and free to use, it contains easy to use
+        templates for the STM32 L476RG microcontroller. It works on Windows, OSX
+        and GNU/Linux. Feel free to commit some code or to contact me if you
+        have any questions.
+      </p>
+
+      <p>
+        In the future I will try to write some code for some other cortex chips.
+        Also I'm trying to create a simular project for the MSP430 board so I
+        can ditch the Code Composer Studio IDE.
+      </p>
     </div>
     <footer>Copyright &copy 2021</footer>
     <script type="text/javascript" src="js/script.js"></script>
