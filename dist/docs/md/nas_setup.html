@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+  </head>
+  <body>
+    <div class="nav-wrapper">
+      <div class="dots-wrapper">
+        <div id="dot-1" class="browser-dot"></div>
+        <div id="dot-2" class="browser-dot"></div>
+        <div id="dot-3" class="browser-dot"></div>
+      </div>
+      <ul id="navigation">
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="main-container">
+      <h1 id="iotstack-homelab">IOTstack homelab</h1>
+      <p>Author: Ewout van Nimwegen</p>
+      <h2 id="guide">Guide</h2>
+      <h4 id="hardware"><b>Hardware</b></h4>
+      <ul>
+        <li>
+          <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b/"
+            >Raspberry Pi 3B</a
+          >
+          with
+          <a
+            href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit"
+            >Raspberry Pi OS Lite</a
+          >
+          kernel version 5.4
+        </li>
+        <li><p>Seagate 1 TB HDD &amp; cable</p></li>
+        <li><p>Ethernet cable</p></li>
+        <li><p>MicroUSB cable to USB</p></li>
+        <li><p>Ali Express 5V 3A power supply</p></li>
+        <li><p>Ziggo router</p></li>
+      </ul>
+      <p><b>Update system</b></p>
+      <pre
+        class="console"
+      ><code>PI :~ $ sudo apt-get update -y &amp;&amp; sudo apt-get dist-upgrade -y</code></pre>
+      <h4 id="security"><b>Security</b></h4>
+      <p>
+        To secure the pi setup a ssh key then remove the remote password
+        setting.
+      </p>
+      <p><b>SSH key</b></p>
+      <pre class="console"><code>PI :~ $ mkdir ~/.ssh
+PC :~ $ ssh key-gen &amp;&amp; scp ~/.ssh/id_rsa.pub hostname@ip:~/.ssh/authorized_keys</code></pre>
+      <p><b>Remove remote password login</b></p>
+      <p>Edit the ssh demon config file.</p>
+      <pre
+        class="console"
+      ><code>PI :~ $ sudo vim /etc/ssh/sshd_config</code></pre>
+      <p>Restart the ssh demon.</p>
+      <pre
+        class="console"
+      ><code>PI :~ $ sudo systemctl restart sshd.service</code></pre>
+      <h4 id="dependencies"><b>Dependencies</b></h4>
+      <p>Raspberry Pi</p>
+      <pre
+        class="console"
+      ><code>PI :~ $ sudo apt-get install git curl vim -y</code></pre>
+      <p>PC</p>
+      <ul>
+        <li>
+          <p>
+            <a href="https://nextcloud.com/install/#install-clients"
+              >nextcloud</a
+            >
+          </p>
+        </li>
+        <li>
+          <p><a href="https://www.wireguard.com/install/">wireguard</a></p>
+        </li>
+      </ul>
+      <p>
+        <b><a href="https://github.com/SensorsIot/IOTstack">IOTstack</a></b>
+      </p>
+      <pre class="console"><code>PI :~ $ curl -fsSL \
+https://raw.githubusercontent.com/SensorsIot/IOTstack/master/install.sh | bash
+PI :~ $ cd IOTstack &amp;&amp; ./menu.sh</code></pre>
+      <p>For this examples I will install the following containers:</p>
+      <ul>
+        <li>
+          <p><a href="https://www.adminer.org/">adminer</a></p>
+        </li>
+        <li>
+          <p><a href="https://mariadb.org/">mariadb</a></p>
+        </li>
+        <li>
+          <p><a href="https://mosquitto.org/">mosquitto</a></p>
+        </li>
+        <li>
+          <p><a href="https://nextcloud.com/">nextcloud</a></p>
+        </li>
+        <li>
+          <p><a href="https://nodered.org/">nodered</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.portainer.io/">portainer-ce</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.wireguard.com/">wireguard</a></p>
+        </li>
+      </ul>
+      <p>
+        Create the <b>compose_override.yml</b> file before building the stack.
+        As the filename suggests, this file overrides the generated config file.
+        So we do not need to worry about editting the config file after adding
+        or removing containers.
+      </p>
+      <pre
+        class="console"
+      ><code>PI :~ $ touch ~/IOTstack/compose_override.yml &amp;&amp; \
+vim ~/IOTstack/compose_override.yml</code></pre>
+      <div class="sourceCode" id="cb8">
+        <pre
+          class="sourceCode yaml"
+        ><code class="sourceCode yaml"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="fu">wireguard:</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="fu">environment:</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="kw">-</span> PUID=1000</a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="kw">-</span> PGID=1000</a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="kw">-</span> TZ=Europe/Amsterdam</a>
+<a class="sourceLine" id="cb8-7" title="7">      <span class="kw">-</span> SERVERURL=connect-me.duckdns.org</a>
+<a class="sourceLine" id="cb8-8" title="8">      <span class="kw">-</span> SERVERPORT=51820</a>
+<a class="sourceLine" id="cb8-9" title="9">      <span class="kw">-</span> PEERS=10</a>
+<a class="sourceLine" id="cb8-10" title="10"></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="fu">nextcloud:</span></a>
+<a class="sourceLine" id="cb8-12" title="12">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb8-13" title="13">      <span class="kw">-</span> ./volumes/nextcloud/html:/var/www/html</a>
+<a class="sourceLine" id="cb8-14" title="14"></a>
+<a class="sourceLine" id="cb8-15" title="15">  <span class="fu">nextcloud_db:</span></a>
+<a class="sourceLine" id="cb8-16" title="16">    <span class="fu">environment:</span></a>
+<a class="sourceLine" id="cb8-17" title="17">      <span class="kw">-</span> MYSQL_ROOT_PASSWORD=rootPassword</a>
+<a class="sourceLine" id="cb8-18" title="18">      <span class="kw">-</span> MYSQL_PASSWORD=mysqlPassword</a>
+<a class="sourceLine" id="cb8-19" title="19">      <span class="kw">-</span> MYSQL_DATABASE=nextcloud</a>
+<a class="sourceLine" id="cb8-20" title="20">      <span class="kw">-</span> MYSQL_USER=nextcloud</a>
+<a class="sourceLine" id="cb8-21" title="21"></a>
+<a class="sourceLine" id="cb8-22" title="22">  <span class="fu">mariadb:</span></a>
+<a class="sourceLine" id="cb8-23" title="23">    <span class="fu">environment:</span></a>
+<a class="sourceLine" id="cb8-24" title="24">      <span class="kw">-</span> MYSQL_ROOT_PASSWORD=rootPassword</a>
+<a class="sourceLine" id="cb8-25" title="25">      <span class="kw">-</span> MYSQL_PASSWORD=mysqlPassword</a>
+<a class="sourceLine" id="cb8-26" title="26">      <span class="kw">-</span> MYSQL_DATABASE=nextcloud</a>
+<a class="sourceLine" id="cb8-27" title="27">      <span class="kw">-</span> MYSQL_USER=nextcloud</a></code></pre>
+      </div>
+      <p>
+        Build and launch the stack. Then launch the portainer-ce browser page
+        with <b>http://ip:9000</b>. Use this gui to easily manage your
+        containers.
+      </p>
+      <h4 id="dynamic-dns"><b>Dynamic DNS</b></h4>
+      <p>
+        Dynamic DNS is a method to automatically update the I.P. address of your
+        self hosted instance. We will use <b>DuckDNS</b> for this example. Go to
+        <b><a href="https://www.duckdns.org/">duckdns.org</a></b> and create an
+        account. Get a domain, I’m using <b>connect-me.duckdns.org</b>, it is
+        possible to duplicate mine, because every account is bound to an address
+        and a specific token.
+      </p>
+      <pre
+        class="console"
+      ><code>PI :~ $ vim ~/IOTstack/duck/duck.sh</code></pre>
+      <p>Add the domain and token.</p>
+      <div class="sourceCode" id="cb10">
+        <pre
+          class="sourceCode sh"
+        ><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="va">DOMAINS=</span><span class="st">&quot;connect-me.duckdns.org&quot;</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="va">DUCKDNS_TOKEN=</span><span class="st">&quot;r61bg77a-cd9b-4f48-ad34-560bcf543221&quot;</span></a></code></pre>
+      </div>
+      <p>Execute the script every 5 minutes with crontab.</p>
+      <pre class="console"><code>PI :~ $ crontab -e</code></pre>
+      <p>Add this line.</p>
+      <div class="sourceCode" id="cb12">
+        <pre
+          class="sourceCode sh"
+        ><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="ex"></span>*/5 * * * * sudo ~/IOTstack/duck/duck.sh >/dev/null 2>&1</a></code></pre>
+      </div>
+      <h4 id="vpn-setup"><b>VPN setup</b></h4>
+      <p>
+        <b>Security key</b> We’ve already installed Wireguard. Copy the security
+        key or QR code to your devices.
+      </p>
+      <p>With scp:</p>
+      <pre
+        class="console"
+      ><code>PI :~ $ scp IOTstack/services/wireguard/config/peer1/peer1.png \
+hostname@ip:~/peer1.png</code></pre>
+      <p>
+        <b>Port forwarding</b> Open a webpage and enter your routers I.P.
+        address. Allow all external I.P.’s to forward data through
+        <b>UDP port 51820</b> to your device’s I.P. address.
+      </p>
+      <p>Use the wireguard app to connect to your VPN.</p>
+      <h2 id="issues">Issues</h2>
+      <p>
+        I’ve walked into a few issues they are listed below with the recommended
+        solutions.
+      </p>
+      <ol type="1">
+        <li>Wireguard missing kernel headers.</li>
+      </ol>
+      <p>console log</p>
+      <div class="sourceCode" id="cb14">
+        <pre
+          class="sourceCode sh"
+        ><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="ex">****</span> Kernel headers dont seem to be available, can't compile the module. Sleeping now. . . ****</a></code></pre>
+      </div>
+      <p>
+        <b>Solution</b> install the stable kernel headers.
+        <a href="https://github.com/linuxserver/docker-wireguard/issues/57"
+          >source</a
+        >
+      </p>
+      <pre
+        class="console"
+      ><code>PI :~ $ sudo apt install --reinstall libraspberrypi0 \
+        libraspberrypi-{bin,dev,doc} raspberrypi-bootloader raspberrypi-kernel</code></pre>
+      <p>Then restart the containers and it should all be fixed.</p>
+      <ol start="2" type="1">
+        <li>IPv4 port forwarding not possible with Ziggo router.</li>
+      </ol>
+      <p>
+        <b>Solution</b> contact Ziggo, ask them to downgrade your routers
+        firmware. to support the IPv4 forwarding.
+      </p>
+      <h2 id="sources">Sources</h2>
+      <ul>
+        <li>
+          <p><a href="https://sensorsiot.github.io/IOTstack">IOTstack</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.docker.com/">Docker</a></p>
+        </li>
+      </ul>
+    </div>
+    <footer>Copyright &copy 2021</footer>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
