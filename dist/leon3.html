@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+  </head>
+  <body>
+    <div class="nav-wrapper">
+      <div class="dots-wrapper">
+        <div id="dot-1" class="browser-dot"></div>
+        <div id="dot-2" class="browser-dot"></div>
+        <div id="dot-3" class="browser-dot"></div>
+      </div>
+      <ul id="navigation">
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="main-container">
+      <h1 id="leon3-development">Leon3 development</h1>
+      <p>Author: Ewout van Nimwegen</p>
+      <p>Date of creation: 17 May 2021</p>
+      <p>
+        Download the GRLIB package and extract it, I’m using
+        grlib-gpl-2021.1-b4265 and the Altera DE2 (cyclone II) board. This board
+        is kinda oldso I had to install various old 32-bit libraries to even
+        start quartus prime. The command line utilities offer much better
+        support over time then GUI’s, because they rely on less 3th party
+        libaries.
+      </p>
+      <pre class="console"><code>
+        PC $ tar xvf grlib-com-&lt;version&gt;.tar.gz</code></pre>
+      <p>Set the environment variables.</p>
+      <pre class="console"><code>
+        PC $ export GRLIB /home/user/grlib-com-&lt;version&gt;
+        PC $ export QUARTUS_ROOTDIR=altera/quartus&lt;version&gt;/quartus/</code></pre>
+      <p>or even better add the following to your ~/.bashrc file</p>
+      <div class="sourceCode" id="cb3">
+        <pre class="sourceCode bash"><code class="sourceCode bash">
+    <span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ALTERAPATH</span><span class="op">=</span>/mnt/c/altera/13.0sp1</span>
+    <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">QUARTUS_ROOTDIR</span><span class="op">=</span><span class="va">$ALTERAPATH</span>/quartus</span>
+    <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">${ALTERAPATH}</span>/quartus/bin</span>
+    <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">${ALTERAPATH}</span>/nios2esd/bin</span>
+    <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+    <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GRLIB</span><span class="op">=</span>/mnt/c/Users/ewout/grlib-gpl-2021.1-b4265</span></code></pre>
+      </div>
+      <p>
+        Then run the install-altera command and compile the source code for the
+        DE2. Luckly we can program the FPGA inside the shell, no gui’s allowed
+        here.
+      </p>
+      <pre class="console"><code>
+    PC $ cd ~/grlib-com-&lt;version&gt;
+    PC $ make install-altera</code></pre>
+      <pre class="console"><code>
+    PC $ cd ~/grlib-com&lt;version&gt;/designs/&lt;board&gt;
+    PC $ make quartus
+    PC $ make quartus-prog-fpga</code></pre>
+      <p>If these green lines pop up your good to go.</p>
+      <pre class="console"><code>
+    Info: Command: quartus_pgm -c USB-Blaster -m JTAG -o p;leon3mp_quartus.sof
+    Info (213045): Using programming cable &quot;USB-Blaster [1-2]&quot;
+    Info (213011): Using programming file leon3mp_quartus.sof with checksum 0x00D82176 for device EP2C35F672@1
+    Info (209060): Started Programmer operation at Mon May 17 15:43:49 2021
+    Info (209016): Configuring device index 1
+    Info (209017): Device 1 contains JTAG ID code 0x020B40DD
+    Info (209007): Configuration succeeded -- 1 device(s) configured
+    Info (209011): Successfully performed operation(s)
+    Info (209061): Ended Programmer operation at Mon May 17 15:43:51 2021
+    Info: Quartus II 32-bit Programmer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 127 megabytes
+    Info: Processing ended: Mon May 17 15:43:51 2021
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:00</code></pre>
+      <p>
+        The hardware configuration is implemented now it is time to write a
+        small hello world program in C.
+      </p>
+      <div class="sourceCode" id="cb7">
+        <pre
+          class="sourceCode c"
+        ><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+    <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+    <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+    <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    puts<span class="op">(</span><span class="st">&quot;Leon(idas) the great&quot;</span><span class="op">);</span></span>
+    <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+      </div>
+      <p>Compile the program with:</p>
+      <pre
+        class="console"
+      ><code>PC $ sparc-gaisler-elf-gcc.exe -mcpu=leon3 -o hello hello.c</code></pre>
+      <h2 id="grmon3-flasher-debugger">GRMON3 flasher &amp; debugger</h2>
+      <p>
+        At first I tried to use grmon3 on Linux, but it seemed impossible to get
+        it to work. I received this error every time I ran the altera jtag
+        command.
+      </p>
+      <pre class="console"><code>JTAG chain (1): EP2C35
+    ERROR! AMBA plug&amp;play not found!
+    Failed to initialize target!</code></pre>
+      <p>After my forum post Arvid explained the following:</p>
+      <p>
+        <i
+          >The Altera Blaster JTAG is only supported by the 32-bit version, this
+          is mentioned in the manual. And evaluation version is only available
+          as 64-bit.</i
+        >
+      </p>
+      <p>
+        <i
+          >However it seems like you managed to connect on Windows, so it?s
+          possible that the 64-bit works on that platform (I don?t remember if I
+          have tested the 64-bit version using the Blaster JTAG on Windows, and
+          I don?t have access to any system to test it at the moment). The
+          message that it requires a PRO version is bug that is related to this
+          particular template design. I have made a new release of the GRMON
+          evaluation version (3.2.12.1) that fixes it.</i
+        >
+      </p>
+      <p>
+        Luckly I had a Windows 10 box available and it worked perfectly with:
+      </p>
+      <pre class="console"><code>PC $ .\grmon.exe -altjtag -u</code></pre>
+      <p>
+        The -altjtag flag allows us to use the Altera JTAG and the -u flag
+        forwards the local FPGA console to this workstation. Load the program to
+        the FPGA then start it with the run command.
+      </p>
+      <pre class="console"><code>GRMON3 $ load hello
+    GRMON3 $ run</code></pre>
+      <p>Great it works!</p>
+      <pre class="console"><code>grmon3&gt; run
+    Leon(idas) the great
+    
+      Program exited normally</code></pre>
+      <p>Developing on Windows requires a few extra tools:</p>
+      <ul>
+        <li>WSL2 (I’m using Ubuntu 20.04)</li>
+        <li>VcxSrv</li>
+      </ul>
+      <p>
+        I decided to use the XFCE GUI to get access to the xconfig tool. Add
+        these lines to the ~/.bashrc file.
+      </p>
+      <div class="sourceCode" id="cb13">
+        <pre class="sourceCode bash"><code class="sourceCode bash">
+    <span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the IP Address of the Windows 10 Host and use it in Environment.</span></span>
+    <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">DISPLAY</span><span class="op">=</span><span class="va">$(</span><span class="fu">grep</span> <span class="at">-m</span> 1 nameserver /etc/resolv.conf <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2}&#39;</span><span class="va">)</span>:0</span>
+    <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LIBGL_ALWAYS_INDIRECT</span><span class="op">=</span>1</span></code></pre>
+      </div>
+      <p>
+        <a href="xfce.webp"
+          ><img src="images/xfce.webp" width="800" height="300"
+        /></a>
+      </p>
+      <h2 id="debugging">Debugging</h2>
+      <p>
+        Compile the program with the -g flag to enable debugging. Then restart
+        the grmon3 debugger and load the program. Place a breakpoint on the
+        main() line and start the program.
+      </p>
+      <pre class="console"><code>GRMON3 $ bp main
+    GRMON3 $ run</code></pre>
+      <pre><code>grmon3&gt; run
+      Breakpoint 1 hit
+      0x4000124c: b0102000  mov  0, %i0  &lt;main+4&gt;</code></pre>
+      <p>
+        Use the step command to step through the code and use the reg command to
+        view registers.
+      </p>
+      <pre class="console"><code>grmon3&gt; cont
+    Leon(idas) the great
+    
+      Program exited normally</code></pre>
+      <h2 id="blinky-led">Blinky LED</h2>
+      <p>
+        Another fun example is the blinky LED. The example below shows how we
+        can modify the gpio_0 register which is available within the default de2
+        example of grlib. I remapped GPIO_0[0] (PIN_D25) to LEDR[2] (PIN_AB21).
+        Recompile the VHDL code and reprogram the FPGA. Then upload the C code
+        below. This code defines all io of gpio0 as outputs and sets them to
+        high. The range of the IO register is available in the IP cores manual.
+      </p>
+      <div class="sourceCode" id="cb17">
+        <pre
+          class="sourceCode c"
+        ><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+    <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+    <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+    <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+    <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> <span class="op">*</span>gpio0_base <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span> <span class="bn">0x80000900</span><span class="op">;</span></span>
+    <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> <span class="op">*</span>gpio0_out <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span> <span class="bn">0x80000904</span><span class="op">;</span></span>
+    <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> <span class="op">*</span>gpio0_dir <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span> <span class="bn">0x80000908</span><span class="op">;</span></span>
+    <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+    <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>gpio0_dir <span class="op">=</span> <span class="bn">0x0000003F</span><span class="op">;</span> <span class="co">// Output</span></span>
+    <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>gpio0_out <span class="op">=</span> <span class="bn">0x0000003F</span><span class="op">;</span> <span class="co">// Set LEDs</span></span>
+    <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+    <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+      </div>
+      <p>
+        <a href="fpga.webp"><img src="images/fpga.webp" width="250" /></a>
+      </p>
+      <h2 id="whats-next">What’s next</h2>
+      <p>
+        Unfortunately it isn’t possible to run Linux on this FPGA, because Linux
+        requires 32MiB RAM and the DE2 has 8M-byte : (
+      </p>
+      <p>
+        This board hasn’t enough resources to function like a MPU but it could
+        easily run a RTOS. I’m about to try the Zephyr OS on this board and I
+        might write another post about it.
+      </p>
+      <h2 id="fixes">Fixes</h2>
+      <p>Fix for Quartus prime libpng12 launch error (Linux)</p>
+      <pre
+        class="console"
+      ><code>PC $ echo &quot;deb http://mirrors.kernel.org/ubuntu/ xenial main&quot; | sudo tee -a /etc/apt/sources.list &amp;&amp; sudo apt-get update &amp;&amp; sudo apt install -y --allow-unauthenticated libpng12-0</code></pre>
+      <h2 id="sources">Sources</h2>
+      <ul>
+        <li>
+          <a
+            href="https://www.gaisler.com/index.php/downloads/debug-tools?task=view&amp;id=190"
+            >Debugger</a
+          >
+        </li>
+        <li>
+          <a href="https://www.thanassis.space/myowncpu.html">Xilinx guide</a>
+        </li>
+        <li>
+          <a
+            href="https://discourse.grlib.community/t/grmon3-altera-jtag-debugging-error/128"
+            >grmon3 fix</a
+          >
+        </li>
+      </ul>
+    </div>
+    <footer>Copyright &copy 2021</footer>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
